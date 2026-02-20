@@ -1,0 +1,14 @@
+
+SELECT c.country_name , 
+CASE 
+  WHEN AVG(w.weather_state) <= 15 THEN 'Cold'
+  WHEN AVG(w.weather_state) >= 25 THEN 'Hot'
+  ELSE 'Warm'
+END
+AS Weather_type
+FROM Weather w
+LEFT JOIN Countries c
+ON w.country_id = c.country_id
+WHERE Month(day) = 11
+AND YEAR(day) = 2019
+GROUP BY c.country_name
