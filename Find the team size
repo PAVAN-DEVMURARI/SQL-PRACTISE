@@ -1,3 +1,11 @@
 
 SELECT employee_id , COUNT (employee_id) OVER(PARTITION BY team_id ORDER BY team_id) AS team_size
 FROM Employee
+
+
+--Alternate method
+SELECT e.employee_id,
+       (SELECT COUNT(*)
+        FROM Employee
+        WHERE team_id = e.team_id) AS team_size
+FROM Employee e;
